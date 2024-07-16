@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue App with Element UI</title>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="/app.js?v=1.0.7"></script> <!-- 添加版本号 -->
+    <style>
+        .logo {
+            font-size: 18px;
+            font-weight: bold;
+            line-height: 60px; /* 确保和 el-header 高度一致 */
+        }
+        .el-header {
+            background-color: #b3c0d1;
+            color: #333;
+            line-height: 60px;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <el-container>
+        <el-header>
+            <el-row type="flex" justify="space-between">
+                <el-col :span="4">
+                    <div class="logo">Aone</div>
+                </el-col>
+                <el-col :span="8">
+                    <el-select v-model="selectedEnvironment" placeholder="选择服务器环境">
+                        <el-option v-for="env in environments" :key="env.value" :label="env.label" :value="env.value"></el-option>
+                    </el-select>
+                </el-col>
+            </el-row>
+        </el-header>
+        <el-main>
+            <h1>{{ message }}</h1>
+            <el-button type="primary" @click="showMessage">Click Me</el-button>
+            <el-button type="primary" @click="reloadDB">Reload DB</el-button>
+            <el-select v-model="selectedDatabase" placeholder="选择数据库">
+                <el-option v-for="db in databases" :key="db" :label="db" :value="db"></el-option>
+            </el-select>
+        </el-main>
+    </el-container>
+</div>
+</body>
+</html>
