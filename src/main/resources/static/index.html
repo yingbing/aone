@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-    <script src="/app.js?v=1.0.7"></script> <!-- 添加版本号 -->
+    <script src="/app.js?v=1.0.15"></script>
     <style>
         .logo {
             font-size: 18px;
@@ -39,10 +39,11 @@
         <el-main>
             <h1>{{ message }}</h1>
             <el-button type="primary" @click="showMessage">Click Me</el-button>
-            <el-button type="primary" @click="reloadDB">Reload DB</el-button>
             <el-select v-model="selectedDatabase" placeholder="选择数据库">
                 <el-option v-for="db in databases" :key="db" :label="db" :value="db"></el-option>
             </el-select>
+            <el-button type="primary" @click="reloadDB">Reload DB</el-button>
+            <p>{{ serverResponse }}</p>
         </el-main>
     </el-container>
 </div>
