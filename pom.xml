@@ -74,6 +74,20 @@
       <version>4.5.13</version>
     </dependency>
 
+    <!-- HikariCP -->
+    <dependency>
+      <groupId>com.zaxxer</groupId>
+      <artifactId>HikariCP</artifactId>
+      <version>5.0.1</version>
+    </dependency>
+
+    <!-- Sybase JDBC 驱动 -->
+    <dependency>
+      <groupId>com.sybase.jdbc4</groupId>
+      <artifactId>jconn4</artifactId>
+      <version>7.0</version>
+    </dependency>
+
   </dependencies>
   <build>
     <plugins>
