@@ -1,0 +1,75 @@
+<template>
+    <div>
+        <h1>Linux Command Executor</h1>
+        <input v-model="command" placeholder="Enter Linux command" />
+        <button @click="sendCommand">Execute</button>
+        <pre>{{ output }}</pre>
+    </div>
+</template>
+
+<script>
+    export default {
+      data() {
+        return {
+          command: '',
+          output: '',
+          socket: null
+        };
+      },
+      methods: {
+        sendCommand() {
+          if (this.command.trim() !== '') {
+            this.output = '';
+            this.socket.send(this.command);
+            this.command = '';
+          }
+        },
+        setupWebSocket() {
+          this.socket = new WebSocket(`ws://${window.location.host}/ws/linux-command`);
+
+          this.socket.onmessage = (event) => {
+            this.output += event.data + '\n';
+          };
+
+          this.socket.onopen = () => {
+            console.log('WebSocket connection established');
+          };
+
+          this.socket.onclose = () => {
+            console.log('WebSocket connection closed');
+          };
+
+          this.socket.onerror = (error) => {
+            console.error('WebSocket error:', error);
+          };
+        }
+      },
+      mounted() {
+        this.setupWebSocket();
+      },
+      beforeDestroy() {
+        if (this.socket) {
+          this.socket.close();
+        }
+      }
+    };
+</script>
+
+<style scoped>
+    input {
+      width: 80%;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 10px;
+    }
+
+    pre {
+      background-color: #f4f4f4;
+      padding: 10px;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+</style>

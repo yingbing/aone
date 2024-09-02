@@ -3,8 +3,8 @@ package com.ice;
 import com.ice.handlers.DatabaseResource;
 import com.ice.handlers.EnvironmentResource;
 import com.ice.handlers.MessageResource;
-import io.muserver.MuServer;
-import io.muserver.MuServerBuilder;
+import com.ice.ssh1.WebSocketCommandHandler;
+import io.muserver.*;
 import io.muserver.handlers.ResourceHandlerBuilder;
 import io.muserver.rest.RestHandlerBuilder;
 
@@ -30,6 +30,7 @@ public class App {
                 .addHandler(context("/")
                         .addHandler(ResourceHandlerBuilder.classpathHandler("/static"))
                 )
+                .addHandler(WebSocketCommandHandler.createWebSocketHandler())
                 .start();
 
         System.out.println("Server started at " + server.uri());
